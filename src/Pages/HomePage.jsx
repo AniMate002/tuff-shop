@@ -12,7 +12,6 @@ export default function HomePage (){
     return(
         <div>
             <div className="flex flex-col tablet:flex-row justify-between items-stretch gap-10 flex-wrap mb-10 mx-5 sm-tablet:mx-0">
-                <SideBar />
                 <Banner />
             </div>
             <Trending products={products} amount={5} error={productsError} isLoading={productsIsLoading}/>
