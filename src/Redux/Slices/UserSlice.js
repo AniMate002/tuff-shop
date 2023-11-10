@@ -15,7 +15,8 @@ const initialState = {
     error: null,
     type: TYPE_LOGIN,
     showModul: false,
-    isLogged: false
+    isLogged: false,
+    isDarkTheme: true,
 }
 
 const POST_USER_URL = "https://api.escuelajs.co/api/v1/users"
@@ -89,6 +90,9 @@ const userSlice = createSlice({
             // const found = state.cart.find(item => item.id == action.payload)
             // state.cart.splice(found.id, 1)
             state.cart = state.cart.filter(item => item.id !== action.payload)
+        },
+        toggleDarkTheme: (state, action) => {
+            state.isDarkTheme = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -120,4 +124,4 @@ const userSlice = createSlice({
 
 
 export default userSlice.reducer
-export const {toggleModalType, toggleModalWindow, addItemToCart, logOutUser, changeAmount, deleteItemFromCart} = userSlice.actions
+export const {toggleModalType, toggleModalWindow, addItemToCart, logOutUser, changeAmount, deleteItemFromCart, toggleDarkTheme} = userSlice.actions

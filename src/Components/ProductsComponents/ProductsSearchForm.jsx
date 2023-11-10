@@ -53,7 +53,7 @@ export default function ProductsSearchForm (){
         
         console.log({...data, category})
     }
-    const options = [{value: "", label: "---"}].concat(categories.map(cat => {
+    const options = [{value: "", label: "-"}].concat(categories.map(cat => {
         return(
             {
                 value: cat.name,
@@ -64,12 +64,12 @@ export default function ProductsSearchForm (){
 
     return(
         <form onSubmit={handleSubmit(onSubmit)} className="flex justify-start items-center gap-5 mb-10 flex-col tablet:flex-row">
-                <input className=" bg-mainColor tablet:text-base text-sm w-full tablet:w-fit text-greyText px-5 py-2 rounded-lg" {...register('productTitle')} type="text" placeholder="Product name" />
-                <input className=" bg-mainColor text-greyText tablet:text-base tablet:w-fit text-sm w-full px-5 py-2 rounded-lg" {...register('priceFrom', {
+                <input className=" dark:bg-mainColor bg-LightMainColor tablet:text-base text-sm w-full tablet:w-fit dark:text-greyText text-LightTextColor px-5 py-2 rounded-lg" {...register('productTitle')} type="text" placeholder="Product name" />
+                <input className=" dark:bg-mainColor bg-LightMainColor dark:text-greyText text-LightTextColor tablet:text-base tablet:w-fit text-sm w-full px-5 py-2 rounded-lg" {...register('priceFrom', {
                     min: 0
                 })} type="number" placeholder="Price from" />
                 <Select onChange={(data) => setCategory(data.value)} options={options} isLoading={isLoading} styles={stylesForSelect}/>
-                <button type="submit" className=" cursor-pointer hover:bg-mainColor text-white px-5 py-2 rounded-lg bg-secondaryColor transition-all">Search</button>
+                <button type="submit" className=" cursor-pointer dark:hover:bg-mainColor hover:bg-secondaryDarkColor text-white px-5 py-2 rounded-lg dark:bg-secondaryColor bg-LightBlueSecondaryColor transition-all">Search</button>
         </form>
     )
 }
