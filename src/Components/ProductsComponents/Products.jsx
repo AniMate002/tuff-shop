@@ -6,6 +6,7 @@ import { getPaginationProducts } from "../../Redux/Slices/ProductsSlice";
 import ProductsPagination from "./ProductsPagination";
 import { useSearchParams } from "react-router-dom";
 import ProductsSearchForm from "./ProductsSearchForm";
+import { imageNotFoundHandler } from "../jsLogic";
 
 
 export default function Products(){
@@ -31,12 +32,12 @@ export default function Products(){
         return(
             <Link to={`/products/${product.id}`} key={product.id} className="dark:bg-mainColor bg-LightMainColor rounded-b-lg hover:bg-blue-100">
                 <div className=" overflow-hidden w-100% desktop:h-[250px]">
-                    <img src={product.images[0]} className=" rounded-t-lg h-full w-full"/>
+                    <img onError={(e) => imageNotFoundHandler(e)} src={product.images[0]} className=" rounded-t-lg h-full w-full"/>
                 </div>
                 <div className="px-4 py-4 flex flex-col justify-between">
                     <h1 className="tablet:text-md desktop:text-lg text-sm font-bold dark:text-white text-LightTextColor mb-2">{product.title}</h1>
                     <h3 className=" dark:text-greyText desktop:text-lg text-LightBlueSecondaryColor laptop:text-sm text-vsm laptop:mb-7 mb-4">{product.category.name}</h3>
-                    <div className=" flex justify-between laptop:items-center items-start bottom-0 laptop:flex-row flex-col">
+                    <div className=" flex justify-between laptop:items-center items-start bottom-0 laptop:flex-row flex-col flex-wrap">
                         <span className="font-bold tablet:text-2xl text-lg text-LightBlueSecondaryColor dark:text-secondaryColor">{product.price}$</span>
                         <span className=" text-darkerGreyText line-through laptop:text-lg text-md">{Math.floor(product.price *1.2 + 3)}$</span>
                         <span className=" text-darkerGreyText text-vsm">19 people purchased</span>

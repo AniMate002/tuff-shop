@@ -3,6 +3,7 @@ import CartItemCounter from "./CartItemCounter";
 import { useDispatch } from "react-redux";
 import { deleteItemFromCart } from "../../Redux/Slices/UserSlice";
 import { Link } from "react-router-dom";
+import { imageNotFoundHandler } from "../jsLogic";
 
 export default function SingleCartItem ({item}) {
     const dispatch = useDispatch()
@@ -10,7 +11,7 @@ export default function SingleCartItem ({item}) {
         <div className=" dark:bg-mainColor hover:bg-blue-100 transition-all bg-LightMainColor flex flex-col tablet:flex-row gap-3 tablet:gap-0 items-center justify-between px-5 py-5 rounded-xl mb-10">
             <Link to={`/products/${item.id}`} className="flex justify-start items-center gap-3">
                 <div className=" truncate w-[180px] h-[100px] rounded-lg">
-                    <img src={item.images?.[1]} className="my-[-35px]"/>
+                    <img onError={(e) => imageNotFoundHandler(e)} src={item.images[1]} className="my-[-35px]"/>
                 </div>
                 <div>
                     <div className="dark:text-white text-LightTextColor sm-tablet:text-base text-sm font-bold mb-2">{item.title}</div>

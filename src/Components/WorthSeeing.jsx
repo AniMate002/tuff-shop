@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { imageNotFoundHandler } from "./jsLogic";
 
 export default function WorthSeeing({products, amount, error, isLoading}){
     const trending = products.filter((_, index) => index <= 5 + amount && index > 5)
     const renderedProducts = trending.map(product => {
         return(
             <Link to={`/products/${product.id}`} key={product.id} className="rounded-lg hover:bg-LightMainColor dark:hover:bg-mainColor transition-all">
-                <img src={product.images[0]} className=" rounded-t-lg laptop:h-[300px] h-[250px] mx-auto"/>
+                <img onError={(e) => imageNotFoundHandler(e)} src={product.images[0]} className=" rounded-t-lg laptop:h-[300px] h-[250px] mx-auto"/>
                 <div className="px-4 py-4">
                     <h1 className="text-md font-bold dark:text-white text-LightTextColor mb-2 text-center">{product.title}</h1>
                 </div>

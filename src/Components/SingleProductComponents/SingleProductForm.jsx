@@ -4,6 +4,7 @@ import withReactContent  from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import {Link, useNavigate, useParams} from 'react-router-dom'
 import { addItemToCart, storageName, toggleModalWindow } from "../../Redux/Slices/UserSlice";
+import { imageNotFoundHandler } from "../jsLogic";
 
 export default function SingleProductForm({product, isLoading, error}){
     const navigate = useNavigate()
@@ -60,14 +61,14 @@ export default function SingleProductForm({product, isLoading, error}){
              <h1 className="dark:text-white text-LightTextColor text-3xl font-bold text-center">Loading <i className="fa-solid fa-spinner fa-spin"></i></h1>
             : 
              <div className="flex flex-col desktop:flex-row justify-start gap-2">
-                <div className=" truncate tablet:w-[380px] tablet:h-[380px]">
-                    <img className="rounded-lg" src={currImage || product?.images?.[0]} alt="main picture" />
+                <div className=" truncate tablet:w-[380px] desktop:w-[1100px] tablet:h-[380px]">
+                    <img onError={(e) => imageNotFoundHandler(e)} className="rounded-lg" src={currImage || product?.images?.[0]} alt="main picture" />
                 </div>
                 <div className="flex desktop:flex-col flex-row gap-5 flex-wrap">
                     {product?.images?.map((image, index) => {
                         return(
                             <div key={index} onMouseEnter={() => setCurrImage(image)} className=" cursor-pointer truncate w-[90px] h-[90px] rounded-lg hover:rounded-2xl transition-all hover:border-2 border-secondaryColor">
-                                <img src={product?.images?.[index]} className="h-[90px] w-[90px]" alt="picure" />
+                                <img onError={(e) => imageNotFoundHandler(e)} src={product?.images?.[index]} className="h-[90px] w-[90px]" alt="picure" />
                             </div>
                         )
                     })}

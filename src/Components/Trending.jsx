@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import { imageNotFoundHandler } from "./jsLogic";
 
 export default function Trending({products, amount, error, isLoading}){
     const trending = products.filter((_, index) => index < amount)
@@ -8,7 +9,7 @@ export default function Trending({products, amount, error, isLoading}){
         return(
             <Link to={`/products/${product.id}`} key={product.id} className="dark:bg-mainColor bg-LightMainColor rounded-b-lg">
                 <div className=" overflow-hidden w-100% desktop:h-[250px]">
-                    <img src={product.images[0]} className=" rounded-t-lg h-full w-full"/>
+                    <img onError={(e) => imageNotFoundHandler(e)} src={product.images[0]} className=" rounded-t-lg h-full w-full"/>
                 </div>
                 <div className="px-4 py-4 flex flex-col justify-between">
                     <h1 className="text-md font-bold dark:text-white text-LightTextColor mb-2">{product.title}</h1>

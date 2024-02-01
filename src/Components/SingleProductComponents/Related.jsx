@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { Link, useFetcher } from "react-router-dom";
 import { setRelated } from "../../Redux/Slices/ProductsSlice";
+import { imageNotFoundHandler } from "../jsLogic";
 
 export default function Related({products, amount, error, isLoading, id}){
     const [rand, setRand] = useState(0)
@@ -18,7 +19,7 @@ export default function Related({products, amount, error, isLoading, id}){
         return(
             <Link to={`/products/${product.id}`} key={product.id} className="dark:bg-mainColor bg-LightMainColor hover:bg-blue-100 rounded-b-lg">
                 <div className=" overflow-hidden w-100% desktop:h-[250px]">
-                    <img src={product.images[0]} className=" rounded-t-lg h-full w-full"/>
+                    <img onError={(e) => imageNotFoundHandler(e)} src={product.images[0]} className=" rounded-t-lg h-full w-full"/>
                 </div>
                 <div className="px-4 py-4">
                     <h1 className="text-md font-bold dark:text-white text-LightTextColor mb-2">{product.title}</h1>
